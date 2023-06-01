@@ -1,0 +1,24 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  annotations:
+    kubernetes.io/ingress.class: nginx
+  labels:
+    app: guestbook
+    app.kubernetes.io/instance: guestbook
+    tier: frontend
+  name: guestbook-absi-ingress
+  namespace: guestbook-demo
+spec:
+  ingressClassName: nginx
+  rules:
+  - host: guestbook.absi.test
+    http:
+      paths:
+      - backend:
+          service:
+            name: frontend
+            port:
+              number: 80
+        path: /
+        pathType: Prefix
